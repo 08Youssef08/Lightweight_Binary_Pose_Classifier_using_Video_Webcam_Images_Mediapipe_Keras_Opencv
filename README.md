@@ -5,10 +5,10 @@
 The **Lightweight Binary Pose Classifier** is a framework designed to classify states like "Awake" or "Asleep" based on body pose data collected from videos, webcam feeds, or images. It leverages **MediaPipe**, **OpenCV**, and **Keras** to extract and analyze pose landmarks, train models, and perform real-time monitoring.  
 
 ### **Current Application**  
-This project is specifically used for **baby awakeness monitoring**, offering insights into whether a baby is awake or asleep through non-invasive observation.  
+This project is currently specifically used for **baby awakeness monitoring**, offering insights into whether a baby is awake or asleep through non-invasive observation.  
 
 > **Note:**  
-This project is part of a **larger ongoing initiative** and is still under **development and testing**. While it remains a work in progress, the current version is **functional and useful** for research and preliminary applications.
+This project is part of a **larger ongoing initiative** and is still under **development and testing**. While it remains a work in progress, the current version is **functional and useful** for experimenting and preliminary applications.
 
 ---
 
@@ -30,7 +30,7 @@ This project is part of a **larger ongoing initiative** and is still under **dev
    - Evaluate models with clear metrics like **accuracy** for classification performance.
 
 5. **Modular Design:**
-   - Components for **landmark extraction**, **data preprocessing**, **model training**, and **real-time inference** can be used independently or together.
+   - Components for **landmark extraction**, **data preprocessing**, **model training**, and **real-time inference** will easily be used independently or together.
 
 ---
 
@@ -38,9 +38,9 @@ This project is part of a **larger ongoing initiative** and is still under **dev
 This project is built on **Python 3.8.18** 
 Install dependencies using:
 ```bash
-conda create -n lightweight_classifier python=3.8.18
-conda activate lightweight_classifier
-pip install mediapipe opencv-python numpy pandas scikit-learn tensorflow
+conda create -n StateEnv python=3.8.18
+conda activate StateEnv
+pip install -r requirements.txt
 ```
 
 ---
@@ -51,14 +51,14 @@ pip install mediapipe opencv-python numpy pandas scikit-learn tensorflow
 Collect pose landmarks from a camera, video, or images.  
 Run:
 ```bash
-python collectors.py --source [camera/video/image] --data_path [path/to/media] --state [Asleep/Awake] --output_csv [path/to/output.csv]
+python collect_data.py --source [camera/video/image] --data_path [path/to/media] --state [Asleep/Awake] --output_csv [path/to/output.csv]
 ```
 
 ### **2. Train the Model**
 Train a deep learning model using preprocessed data.  
 Run:
 ```bash
-python train_model.py --data_path [path/to/dataset.csv] --output_model [path/to/save/model.pkl] --epochs 100 --batch_size 32 --test_size 0.3 --state_column state
+python train.py --data_path [path/to/dataset.csv] --output_model [path/to/save/model.pkl] --epochs 100 --batch_size 32 --test_size 0.3 --state_column state
 ```
 
 ### **3. Monitor in Real-Time**
@@ -77,7 +77,8 @@ Lightweight_Binary_Pose_Classifier/
 │   ├── collectors.py           # For data collection
 │   ├── monitore_utils.py       # For real-time monitoring
 │   ├── preprocess.py           # Preprocessing functions
-├── train_model.py              # Script for model training
+├── collect_data.py                  # Script for keypoint extraction, labeling and saving the csv
+├── train.py              # Script for model training
 ├── monitor.py                  # Script for real-time monitoring
 └── README.md                   # Project documentation
 ```
@@ -85,11 +86,10 @@ Lightweight_Binary_Pose_Classifier/
 ---
 
 ## **Future Improvements**
-- Integration of additional pose datasets for broader applications.
-- Model optimization for faster inference on low-end devices.
-- Support for additional classification states beyond "Awake" and "Asleep."
+- Enhanced preprocessing of keypoint data
+- Model optimization.
 - Advanced visualization of landmarks and classification results.
-- Deployment on **IoT devices** and **mobile platforms** for enhanced portability.
+-Integration with **IoT devices** and **mobile platforms** for enhanced portability.
 
 ---
 
